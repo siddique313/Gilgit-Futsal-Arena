@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.web
+    ports:
+      - "3000:3000"
+    env_file: ../web/.env.local
+    environment:
+      - NEXT_PUBLIC_API_URL=http://server:5000
+  server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile.server
+    ports:
+      - "5000:5000"
+    env_file: ../server/.env

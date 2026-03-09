@@ -1,16 +1,16 @@
 interface MatchCardProps {
   match: {
     id: string;
-    homePlaceholder?: string;
-    awayPlaceholder?: string;
-    homeTeam?: { name: string };
-    awayTeam?: { name: string };
-    homeScore?: number;
-    awayScore?: number;
-    scheduledAt?: string;
-    roundLabel?: string;
-    venue?: string;
-    referee?: string;
+    homePlaceholder?: string | null;
+    awayPlaceholder?: string | null;
+    homeTeam?: { name: string } | null;
+    awayTeam?: { name: string } | null;
+    homeScore?: number | null;
+    awayScore?: number | null;
+    scheduledAt?: string | null;
+    roundLabel?: string | null;
+    venue?: string | null;
+    referee?: string | null;
   };
 }
 

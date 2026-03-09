@@ -20,7 +20,7 @@ export function getWsUrl(): string {
 }
 
 type RequestInitWithJSON = Omit<RequestInit, "body"> & {
-  body?: Record<string, unknown>;
+  body?: any;
 };
 
 async function request<T>(
@@ -36,7 +36,9 @@ async function request<T>(
     ...init.headers,
   };
   const body =
-    init.body !== undefined
+    init.body !== undefined &&
+    typeof init.body === "object" &&
+    init.body !== null
       ? JSON.stringify(init.body)
       : (init.body as BodyInit | undefined);
   const res = await fetch(url, { ...init, headers, body });
@@ -54,18 +56,17 @@ async function request<T>(
   return undefined as T;
 }
 
-export const api = {
+const apiMethods = {
   get: <T>(path: string, init?: RequestInit) =>
     request<T>(path, { ...init, method: "GET" }),
-  post: <T>(path: string, body?: Record<string, unknown>, init?: RequestInit) =>
+  post: <T>(path: string, body?: any, init?: RequestInit) =>
     request<T>(path, { ...init, method: "POST", body }),
-  put: <T>(path: string, body?: Record<string, unknown>, init?: RequestInit) =>
+  put: <T>(path: string, body?: any, init?: RequestInit) =>
     request<T>(path, { ...init, method: "PUT", body }),
-  patch: <T>(
-    path: string,
-    body?: Record<string, unknown>,
-    init?: RequestInit,
-  ) => request<T>(path, { ...init, method: "PATCH", body }),
+  patch: <T>(path: string, body?: any, init?: RequestInit) =>
+    request<T>(path, { ...init, method: "PATCH", body }),
   delete: <T>(path: string, init?: RequestInit) =>
     request<T>(path, { ...init, method: "DELETE" }),
 };
+
+export const api = Object.assign(request, apiMethods);

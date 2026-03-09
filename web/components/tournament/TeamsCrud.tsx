@@ -536,7 +536,7 @@ export function TeamsCrud({
         ))}
       </div>
 
-      {teams.length === 0 && !showForm && (
+      {teams.length === 0 && !detailModalOpen && (
         <p className="rounded-lg border border-dashed p-8 text-center text-muted-foreground">
           No teams yet. Click &quot;Add team&quot; to create one.
         </p>

@@ -12,7 +12,7 @@ import {
   RectangleHorizontal,
   Star,
 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { Button } from "@/components/ui/button";
 import { Dialog } from "@/components/ui/Dialog";
 import { StatEntryModal } from "./StatEntryModal";
 
